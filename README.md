@@ -110,7 +110,14 @@ status:
 ```
 kubectl get services -n default -o wide
 ```
-*Note:* We are checking the `default` namespace.
+*Note:* We are checking the `default` namespace.  
+
+The expected result should be:
+```
+NAME                 TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)        AGE       SELECTOR
+kubernetes           ClusterIP      10.96.0.1        <none>           443/TCP        102d      <none>
+my-testing-service   LoadBalancer   10.104.131.229   192.168.55.10 	  80:31954/TCP   44s       app=my-testing-app
+```
 
 ### Verify the Controller Logs
 ```
@@ -119,6 +126,13 @@ kubectl logs $LB_CONTROLLER -n kube-system
 ```
 *Note:* Although our service is on *default* `Namespace`, the Controller is running on *kube-system*.  
 
+The expected result should be:
+```
+[Tue 2018-07-17 21:25:02] ADDED 192.168.55.10 OK namespace:default service:my-testing-service destination:10.104.131.229
+[Tue 2018-07-17 21:25:02] MODIFIED 192.168.55.10 IGNORED namespace:default service:my-testing-service destination:10.104.131.229
+```
+
+
 ### Verify the Controller Routing Table
 ```
 LB_CONTROLLER=`kubectl get pods -n kube-system | grep kubernetes-lb-controller | awk '{print $1}'`
@@ -126,6 +140,19 @@ kubectl exec $LB_CONTROLLER -n kube-system cat /routes
 ```
 *Note:* Although our service is on *default* `Namespace`, the Controller is running on *kube-system*.  
 *Note:* The route table is being written to a text file called *routes* on */*.  
+
+The expected result should be:
+```
+Tue 2018-07-17 21:25:02
++----------------+--------+-----------+----------------------+----------------+
+|       IP       | IN USE | NAMESPACE |     SERVICE NAME     |   CLUSTER IP   |
++----------------+--------+-----------+----------------------+----------------+
+| 192.168.55.10  |   y    |  default  |  my-testing-service  | 10.104.131.229 |
+| 192.168.55.11  |   n    |  default  |         None         |      None      |
+| 192.168.55.12  |   n    |  default  |         None         |      None      |
++----------------+--------+-----------+----------------------+----------------+
+```
+
 
 ## REFERENCES AND IDEAS
 
