@@ -30,8 +30,8 @@ docker build -t kubernetes-lb-controller .
 ### Push the image to the Repository
 ````
 export MY_REPO="feitnomore"
-docker tag kubernetes-lb-controller:latest feitnomore/kubernetes-lb-controller:latest
-docker push feitnomore/kubernetes-lb-controller:latest
+docker tag kubernetes-lb-controller:latest $MY_REPO/kubernetes-lb-controller:latest
+docker push $MY_REPO/kubernetes-lb-controller:latest
 ````
 
 ### Execute the controller
