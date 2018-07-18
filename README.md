@@ -66,9 +66,9 @@ spec:
           env:
           - name: IP_LIST
             value: "
+              default:192.168.55.10
               default:192.168.55.11
-              default:192.168.55.12
-              default:192.168.55.13"
+              default:192.168.55.12"
       serviceAccountName: kubernetes-lb-controller
       restartPolicy: Always
 ```
