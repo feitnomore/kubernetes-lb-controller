@@ -34,7 +34,8 @@ docker tag kubernetes-lb-controller:latest $MY_REPO/kubernetes-lb-controller:lat
 docker push $MY_REPO/kubernetes-lb-controller:latest
 ````
 
-### Execute the controller
+### Create the Deployment Descriptor
+Create a simple *Deployment.yaml* file:  
 ```
 apiVersion: apps/v1
 kind: Deployment
@@ -67,4 +68,10 @@ spec:
       restartPolicy: Always
 ```
 *Note:* Remember to point the `image` to the repository you are using.   
-*Note:* Remember to create the `ServiceAccount` and `ClusterRole` before creating the `Deployment`. 
+
+### Execute the Deployment
+````
+kubectl apply -f Deployment.yaml
+````
+
+*Note:* Remember to create the `ServiceAccount` and `ClusterRole` before creating the `Deployment`. Check [examples](https://github.com/feitnomore/kubernetes-lb-controller/tree/master/examples) for further information on the `ServiceAccount` and `ClusterRole`.
