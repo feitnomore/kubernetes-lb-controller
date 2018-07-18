@@ -46,7 +46,6 @@ def main():
     try:
         events.launchHandler()
     except Exception as e:
-        print(e.message)
         print("Error on event handler")
         sys.exit(1)
 
