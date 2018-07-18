@@ -29,7 +29,7 @@ docker build -t kubernetes-lb-controller .
 
 ### Push the image to the Repository
 ````
-export MY_REPO="feitnomore"
+export MY_REPO="my_local_repository"
 docker tag kubernetes-lb-controller:latest $MY_REPO/kubernetes-lb-controller:latest
 docker push $MY_REPO/kubernetes-lb-controller:latest
 ````
@@ -56,7 +56,7 @@ spec:
     spec:
       containers:
         - name: kubernetes-lb-controller
-          image: feitnomore/kubernetes-lb-controller:latest
+          image: my_local_repository/kubernetes-lb-controller:latest
           imagePullPolicy: Always
           env:
           - name: IP_LIST
