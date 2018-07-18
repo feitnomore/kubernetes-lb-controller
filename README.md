@@ -38,7 +38,7 @@ ifconfig eth0:1 192.168.55.12 netmask 255.255.255.0
 *Note:* Assuming your public interface is `eth0`.   
 *Note:* Assuming you are using network interface `aliases`.  
 *Note:* Assuming your public netword CIDR is `192.168.55.0/24`.  
-*Note:* We're using [Architecture 2](https://github.com/feitnomore/kubernetes-lb-controller/blob/master/images/arch_02.png) for this example. [Architecture 1](https://github.com/feitnomore/kubernetes-lb-controller/blob/master/images/arch_01.png) should work as well.  
+*Note:* We're using [Architecture 2](https://github.com/feitnomore/kubernetes-lb-controller/blob/master/images/arch_02.png) for this example. [Architecture 1](https://github.com/feitnomore/kubernetes-lb-controller/blob/master/images/arch_01.png) should work as well, however the IPs should be added to the nodes instead of the master.  
 
 ### Create the Deployment Descriptor
 Create the kubernetes-lb-controller_Deployment.yaml using the IPs that were added before. The list of IPs needs to be in the format `namespace:IP` , like the example below:
