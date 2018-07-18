@@ -112,6 +112,13 @@ kubectl get services -n default -o wide
 ```
 *Note:* We are checking the `default` namespace.
 
+### Verify the Controller Logs
+```
+LB_CONTROLLER=`kubectl get pods -n kube-system | grep kubernetes-lb-controller | awk '{print $1}'`
+kubectl logs $LB_CONTROLLER -n kube-system
+```
+*Note:* Although our service is on *default* `Namespace`, the Controller is running on *kube-system*.  
+
 ### Verify the Controller Routing Table
 ```
 LB_CONTROLLER=`kubectl get pods -n kube-system | grep kubernetes-lb-controller | awk '{print $1}'`
