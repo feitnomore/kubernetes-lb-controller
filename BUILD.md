@@ -66,5 +66,5 @@ spec:
       serviceAccountName: kubernetes-lb-controller
       restartPolicy: Always
 ```
-*Note:* Remember to point the `image` to the repository you are using. 
+*Note:* Remember to point the `image` to the repository you are using.   
 *Note:* Remember to create the `ServiceAccount` and `ClusterRole` before creating the `Deployment`. 
