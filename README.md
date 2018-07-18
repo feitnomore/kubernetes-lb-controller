@@ -23,11 +23,11 @@ The details below assume you are creating a `ServiceAccount`, a `ClusterRoleBind
 
 ### Create a Service Account
 ```
-kubectl apply -f https://adjust/kubernetes-lb-controller_ServiceAccount.yaml
+kubectl apply -f https://raw.githubusercontent.com/feitnomore/kubernetes-lb-controller/master/examples/kubernetes-lb-controller_ServiceAccount.yaml
 ```
 ### Create the Cluster Role Binding
 ```
-kubectl apply -f https://adjust/kubernetes-lb-controller_ClusterRoleBinding.yaml
+kubectl apply -f https://raw.githubusercontent.com/feitnomore/kubernetes-lb-controller/master/examples/kubernetes-lb-controller_ClusterRoleBinding.yaml
 ```
 ### Add IPs on your kubemaster node
 ```
@@ -130,7 +130,7 @@ kubectl exec $LB_CONTROLLER -n kube-system cat /routes
 
 ## DOCUMENTATION
 
-1. [Building](https://github.com/feitnomore/BUILD.md)
-2. [Examples](https://github.com/feitnomore/examples/README.md)
-3. [Tests](https://github.com/feitnomore/tests/README.md)
+1. [Building](https://github.com/feitnomore/kubernetes-lb-controller/blob/master/BUILD.md)
+2. [Examples](https://github.com/feitnomore/kubernetes-lb-controller/tree/master/examples)
+3. [Tests](https://github.com/feitnomore/kubernetes-lb-controller/tree/master/test)
 
