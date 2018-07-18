@@ -72,7 +72,7 @@ spec:
       serviceAccountName: kubernetes-lb-controller
       restartPolicy: Always
 ```
-*Note:* The IPs are being added to the `default` namespace.  
+*Note:* The IPs are being added to the *default* `Namespace`.  
 *Note:* Not much test has been done on the environment formatting, so please, try to respect the formatting above.  
 
 ### Apply the Deployment
