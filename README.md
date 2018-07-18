@@ -116,7 +116,7 @@ The expected result should be:
 ```
 NAME                 TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)        AGE       SELECTOR
 kubernetes           ClusterIP      10.96.0.1        <none>           443/TCP        102d      <none>
-my-testing-service   LoadBalancer   10.104.131.229   192.168.55.10  80:31954/TCP   44s       app=my-testing-app
+my-testing-service   LoadBalancer   10.104.131.229   192.168.55.10    80:31954/TCP   44s       app=my-testing-app
 ```
 
 ### Verify the Controller Logs
