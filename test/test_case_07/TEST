@@ -1,0 +1,2 @@
+Modify service without IP (that was added before without IP)
+Expect: Service should remain on the same IP

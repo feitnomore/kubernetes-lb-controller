@@ -1,0 +1,2 @@
+Modify service with valid IP (that was added before with different valid IP)
+Expected: Service should move to new IP

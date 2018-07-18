@@ -1,0 +1,2 @@
+Add services, remove one from the middle, and add back 
+Expect: should see service on the same IP

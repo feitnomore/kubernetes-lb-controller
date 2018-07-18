@@ -1,0 +1,3 @@
+Add more than 5 services in the same namespace
+while we have only 5 ips available.
+Expect: 6th service should be pending

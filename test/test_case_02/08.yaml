@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: test02-svc08 
+  namespace: test
+  labels:
+    app: test02-svc08 
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: test02-app08 
+status:
+  loadBalancer: {}

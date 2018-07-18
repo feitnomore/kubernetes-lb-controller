@@ -1,0 +1,2 @@
+Delete without IP (that was added without IP)
+Expected: IP should be free on route table

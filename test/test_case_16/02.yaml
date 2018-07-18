@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: test16-svc01 
+  namespace: default
+  labels:
+    app: test16-svc01 
+spec:
+  type: LoadBalancer
+  externalIPs:
+  - 172.16.230.221
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: test16-app01 
+status:
+  loadBalancer: {}

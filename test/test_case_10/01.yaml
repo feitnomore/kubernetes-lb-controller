@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: test10-svc01 
+  namespace: default
+  labels:
+    app: test10-svc01 
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: test10-app01 
+status:
+  loadBalancer: {}

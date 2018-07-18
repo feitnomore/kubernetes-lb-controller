@@ -1,0 +1,2 @@
+Delete without IP (that was added with valid IP before)
+Expected: IP should be cleaned on route table

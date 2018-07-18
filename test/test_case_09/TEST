@@ -1,0 +1,2 @@
+Modify service without IP (that was added before with IP)
+Expect: Service should move to the new IP

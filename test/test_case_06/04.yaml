@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: test06-svc04 
+  namespace: default
+  labels:
+    app: test06-svc04 
+spec:
+  type: LoadBalancer
+  externalIPs:
+  - 172.16.230.23
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: test06-app04 
+status:
+  loadBalancer: {}

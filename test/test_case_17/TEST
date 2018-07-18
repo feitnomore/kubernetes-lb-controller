@@ -1,0 +1,2 @@
+Delete with invalid IP (that was added with invalid IP)
+Expected: Service removed
