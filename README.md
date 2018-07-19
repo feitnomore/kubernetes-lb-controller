@@ -55,6 +55,8 @@ spec:
     matchLabels:
       k8s-app: kubernetes-lb-controller
   replicas: 1
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
