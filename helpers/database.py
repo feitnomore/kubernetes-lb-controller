@@ -37,7 +37,7 @@ def loadIPList():
             line = str(line)
             line = line.rstrip()
             namespace,ip = line.split(":")
-            cursor.execute('INSERT INTO extips(ip,inuse,namespace) VALUES(?,?,?);' % (ip, 'n', namespace, ))
+            cursor.execute('INSERT INTO extips(ip,inuse,namespace) VALUES(?,?,?);' , (ip, 'n', namespace, ))
         globalholders.databaseConnection.commit()
         return True
     except Exception as e:
