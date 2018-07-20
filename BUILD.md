@@ -33,6 +33,7 @@ export MY_REPO="my_local_repository"
 docker tag kubernetes-lb-controller:latest $MY_REPO/kubernetes-lb-controller:latest
 docker push $MY_REPO/kubernetes-lb-controller:latest
 ````
+*Note:* Remember to set `MY_REPO`.  
 
 ### Create the Deployment Descriptor
 Create a simple *Deployment.yaml* file:  
@@ -67,7 +68,7 @@ spec:
       serviceAccountName: kubernetes-lb-controller
       restartPolicy: Always
 ```
-*Note:* Remember to point the `image` to the repository you are using.   
+*Note:* Remember to set the `image` to the repository you used in the last step.   
 
 ### Execute the Deployment
 ````
