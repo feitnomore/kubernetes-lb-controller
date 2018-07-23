@@ -18,12 +18,16 @@ The Controller takes the `Namespace` and the IP that will be available as parame
 
 ## HOW TO INSTALL IT
 
-The details below assume you are creating a `ServiceAccount`, a `ClusterRoleBinding`, a `Deployment` and a `Pod`, all on the *kube-system* `Namespace`. Please, adjust as necessary.  
-*Note:* We are adding `cluster-admin` as the `ClusterRole` for the `ServiceAccount`.
+The details below assume you are creating a `ServiceAccount`, a `ClusterRole`, a `ClusterRoleBinding`, a `Deployment` and a `Pod`, all on the *kube-system* `Namespace`. Please, adjust as necessary.  
+*Note:* We are adding `patch, get, watch, list, update` as verbs on `services` for the `ClusterRole` we are creating.
 
 ### Create a Service Account
 ```
 kubectl apply -f https://raw.githubusercontent.com/feitnomore/kubernetes-lb-controller/master/examples/kubernetes-lb-controller_ServiceAccount.yaml
+```
+### Create the Cluster Role
+```
+kubectl apply -f https://raw.githubusercontent.com/feitnomore/kubernetes-lb-controller/master/examples/kubernetes-lb-controller_ClusterRole.yaml
 ```
 ### Create the Cluster Role Binding
 ```
