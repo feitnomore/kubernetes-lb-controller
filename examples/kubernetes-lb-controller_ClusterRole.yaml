@@ -1,0 +1,8 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1 
+metadata:
+  name: kubernetes-lb-controller 
+rules:
+  - apiGroups: [""]
+    resources: ["services"]
+    verbs: ["patch", "get", "watch", "list", "update"]
