@@ -33,7 +33,7 @@ kubectl apply -f https://raw.githubusercontent.com/feitnomore/kubernetes-lb-cont
 ```
 kubectl apply -f https://raw.githubusercontent.com/feitnomore/kubernetes-lb-controller/master/examples/kubernetes-lb-controller_ClusterRoleBinding.yaml
 ```
-### Add IPs on your kubemaster node
+### Add IPs on your Kubernetes master node
 ```
 ifconfig eth0:0 192.168.55.10 netmask 255.255.255.0
 ifconfig eth0:1 192.168.55.11 netmask 255.255.255.0
