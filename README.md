@@ -22,19 +22,19 @@ The details below assume you are creating a `ServiceAccount`, a `ClusterRole`, a
 *Note:* We are adding `patch, get, watch, list, update` as verbs on `services` for the `ClusterRole` we are creating.
 
 ### Create a Service Account
-```
-kubectl apply -f https://raw.githubusercontent.com/feitnomore/kubernetes-lb-controller/master/examples/kubernetes-lb-controller_ServiceAccount.yaml
+```sh
+$ kubectl apply -f https://raw.githubusercontent.com/feitnomore/kubernetes-lb-controller/master/examples/kubernetes-lb-controller_ServiceAccount.yaml
 ```
 ### Create the Cluster Role
-```
-kubectl apply -f https://raw.githubusercontent.com/feitnomore/kubernetes-lb-controller/master/examples/kubernetes-lb-controller_ClusterRole.yaml
+```sh
+$ kubectl apply -f https://raw.githubusercontent.com/feitnomore/kubernetes-lb-controller/master/examples/kubernetes-lb-controller_ClusterRole.yaml
 ```
 ### Create the Cluster Role Binding
-```
-kubectl apply -f https://raw.githubusercontent.com/feitnomore/kubernetes-lb-controller/master/examples/kubernetes-lb-controller_ClusterRoleBinding.yaml
+```sh
+$ kubectl apply -f https://raw.githubusercontent.com/feitnomore/kubernetes-lb-controller/master/examples/kubernetes-lb-controller_ClusterRoleBinding.yaml
 ```
 ### Add IPs on your Kubernetes master node
-```
+```sh
 ifconfig eth0:0 192.168.55.10 netmask 255.255.255.0
 ifconfig eth0:1 192.168.55.11 netmask 255.255.255.0
 ifconfig eth0:1 192.168.55.12 netmask 255.255.255.0
@@ -46,7 +46,7 @@ ifconfig eth0:1 192.168.55.12 netmask 255.255.255.0
 
 ### Create the Deployment Descriptor
 Create the kubernetes-lb-controller_Deployment.yaml using the IPs that were added before. The list of IPs needs to be in the format `namespace:IP` , like the example below:
-```
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -83,7 +83,7 @@ spec:
 *Note:* Not much test has been done on the environment formatting, so please, try to respect the formatting above.  
 
 ### Apply the Deployment
-```
+```sh
 kubectl apply -f kubernetes-lb-controller_Deployment.yaml
 ```
 ## HOW TO USE IT
@@ -92,7 +92,7 @@ The details below assumes you are creating a `Service`, of type `LoadBalancer` o
 
 ### Deploy a Service with type LoadBalancer
 Create a service with `type: LoadBalancer` without specifying the external IP, like for example:
-```
+```yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -114,7 +114,7 @@ status:
 *Note:* The service is being created on the `default` namespace.
 
 ### Verify the Service got created and got an IP assigned to it
-```
+```sh
 kubectl get services -n default -o wide
 ```
 *Note:* We are checking the `default` namespace.  
@@ -127,7 +127,7 @@ my-testing-service   LoadBalancer   10.104.131.229   192.168.55.10    80:31954/T
 ```
 
 ### Verify the Controller Logs
-```
+```sh
 LB_CONTROLLER=`kubectl get pods -n kube-system | grep kubernetes-lb-controller | awk '{print $1}'`
 kubectl logs $LB_CONTROLLER -n kube-system
 ```
@@ -141,7 +141,7 @@ The expected result should be:
 
 
 ### Verify the Controller Routing Table
-```
+```sh
 LB_CONTROLLER=`kubectl get pods -n kube-system | grep kubernetes-lb-controller | awk '{print $1}'`
 kubectl exec $LB_CONTROLLER -n kube-system cat /routes
 ```
