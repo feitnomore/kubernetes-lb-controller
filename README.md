@@ -35,9 +35,9 @@ $ kubectl apply -f https://raw.githubusercontent.com/feitnomore/kubernetes-lb-co
 ```
 ### Add IPs on your Kubernetes master node
 ```sh
-ip addr add 192.168.55.10/24 dev eth0 label eth0:0
-ip addr add 192.168.55.11/24 dev eth0 label eth0:1
-ip addr add 192.168.55.12/24 dev eth0 label eth0:2
+# ip addr add 192.168.55.10/24 dev eth0 label eth0:0
+# ip addr add 192.168.55.11/24 dev eth0 label eth0:1
+# ip addr add 192.168.55.12/24 dev eth0 label eth0:2
 ```
 *Note:* Assuming your public interface is `eth0`.   
 *Note:* Assuming you are using network interface `aliases`.  
