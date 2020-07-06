@@ -21,19 +21,13 @@ spec:
         - name: kubernetes-lb-controller
           image: feitnomore/kubernetes-lb-controller:latest
           imagePullPolicy: Always
-          env:
-          - name: IP_LIST
-            value: "
-              frontend:172.17.10.50
-              frontend:172.17.10.51
-              frontend:172.17.10.52
-              frontend:172.17.10.53
-              frontend:172.17.10.54
-              backend:172.17.10.70
-              backend:172.17.10.71
-              backend:172.17.10.72
-              backend:172.17.10.73
-              backend:172.17.10.74"
+          volumeMounts:
+          - name: config-volume
+            mountPath: /etc/config
+      volumes:
+        - name: config-volume
+          configMap:
+            name: kubernetes-lb-controller
       serviceAccountName: kubernetes-lb-controller
       restartPolicy: Always
       

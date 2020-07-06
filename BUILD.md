@@ -13,7 +13,7 @@ In my case, I do this through aliases on the public interface, but can be done o
 Here you can find some simple information on how to build this project by yourself.
 
 ### Clone the Repository
-```
+```sh
 git clone https://github.com/feitnomore/kubernetes-lb-controller.git
 ```
 
@@ -22,22 +22,39 @@ git clone https://github.com/feitnomore/kubernetes-lb-controller.git
 *Note:* Remember to edit `Dockerfile` according to your changes. 
 
 ### Build the Image
-```
+```sh
 cd kubernetes-lb-controller
 docker build -t kubernetes-lb-controller .
 ```
-
+ 
 ### Push the image to the Repository
-````
+````sh
 export MY_REPO="my_local_repository"
 docker tag kubernetes-lb-controller:latest $MY_REPO/kubernetes-lb-controller:latest
 docker push $MY_REPO/kubernetes-lb-controller:latest
 ````
 *Note:* Remember to set `MY_REPO`.  
-
+ 
+### Create the ConfigMap Descriptor
+Create a simple *ConfigMap.yaml* file:
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubernetes-lb-controller 
+  namespace: kube-system
+  labels:
+    k8s-app: kubernetes-lb-controller
+data:
+  default: |-
+     192.168.55.10
+     192.168.55.11
+     192.168.55.12
+```
+ 
 ### Create the Deployment Descriptor
 Create a simple *Deployment.yaml* file:  
-```
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -50,6 +67,8 @@ spec:
     matchLabels:
       k8s-app: kubernetes-lb-controller
   replicas: 1
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -59,20 +78,21 @@ spec:
         - name: kubernetes-lb-controller
           image: my_local_repository/kubernetes-lb-controller:latest
           imagePullPolicy: Always
-          env:
-          - name: IP_LIST
-            value: "
-              default:192.168.55.10
-              default:192.168.55.11
-              default:192.168.55.12"
+          volumeMounts:
+          - name: config-volume
+            mountPath: /etc/config
+      volumes:
+        - name: config-volume
+          configMap:
+            name: kubernetes-lb-controller
       serviceAccountName: kubernetes-lb-controller
       restartPolicy: Always
 ```
 *Note:* Remember to set the `image` to the repository you used in the last step.   
-
+ 
 ### Execute the Deployment
-````
+````sh
 kubectl apply -f Deployment.yaml
 ````
 
-*Note:* Remember to create the `ServiceAccount` and `ClusterRole` before creating the `Deployment`. Check [examples](https://github.com/feitnomore/kubernetes-lb-controller/tree/master/examples) for further information on the `ServiceAccount` and `ClusterRole`.
+*Note:* Remember to create the `ServiceAccount`, `ClusterRole` and `ConfigMap` before creating the `Deployment`. Check [examples](https://github.com/feitnomore/kubernetes-lb-controller/tree/master/examples) for further information on the `ServiceAccount` and `ClusterRole`.

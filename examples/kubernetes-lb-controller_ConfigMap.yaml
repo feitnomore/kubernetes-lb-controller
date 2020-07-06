@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubernetes-lb-controller 
+  namespace: kube-system
+  labels:
+    k8s-app: kubernetes-lb-controller
+data:
+  default: |-
+     192.168.77.101
+     192.168.77.102
+     192.168.77.103
+     192.168.77.104
+     192.168.77.105
+  namespace1: |-
+     192.168.77.106
+     192.168.77.107
+     192.168.77.108
+     192.168.77.109
+     192.168.77.110
+  namespace2: |-
+     192.168.77.111
+     192.168.77.112
+     192.168.77.113
+  namespace3: |-
+     192.168.77.114
+     192.168.77.115

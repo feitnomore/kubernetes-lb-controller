@@ -18,7 +18,7 @@ The Controller takes the `Namespace` and the IP that will be available as parame
 
 ## HOW TO INSTALL IT
 
-The details below assume you are creating a `ServiceAccount`, a `ClusterRole`, a `ClusterRoleBinding`, a `Deployment` and a `Pod`, all on the *kube-system* `Namespace`. Please, adjust as necessary.  
+The details below assume you are creating a `ServiceAccount`, a `ClusterRole`, a `ClusterRoleBinding`, a `ConfigMap`, a `Deployment` and a `Pod`, all on the *kube-system* `Namespace`. Please, adjust as necessary.  
 *Note:* We are adding `patch, get, watch, list, update` as verbs on `services` for the `ClusterRole` we are creating.
 
 ### Create a Service Account
@@ -44,43 +44,26 @@ $ sudo ip addr add 192.168.55.12/24 dev eth0 label eth0:2
 *Note:* Assuming your public netword CIDR is `192.168.55.0/24`.  
 *Note:* We're using [Architecture 2](https://github.com/feitnomore/kubernetes-lb-controller/blob/master/images/arch_02.png) for this example. [Architecture 1](https://github.com/feitnomore/kubernetes-lb-controller/blob/master/images/arch_01.png) should work as well, however the IPs should be added to the nodes instead of the master.  
 
-### Create the Deployment Descriptor
-Create the kubernetes-lb-controller_Deployment.yaml using the IPs that were added before. The list of IPs needs to be in the format `namespace:IP` , like the example below:
+### Create the ConfigMap Descriptor
+Create the kubernetes-lb-controller_Configmap.yaml using the IPs that were added before. The list of IPs needs to be inside a file with the `namespace` name, like the example below:
 ```yaml
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: ConfigMap
 metadata:
-  name: kubernetes-lb-controller
+  name: kubernetes-lb-controller 
   namespace: kube-system
   labels:
     k8s-app: kubernetes-lb-controller
-spec:
-  selector:
-    matchLabels:
-      k8s-app: kubernetes-lb-controller
-  replicas: 1
-  strategy:
-    type: Recreate
-  template:
-    metadata:
-      labels:
-        k8s-app: kubernetes-lb-controller
-    spec:
-      containers:
-        - name: kubernetes-lb-controller
-          image: feitnomore/kubernetes-lb-controller:latest
-          imagePullPolicy: Always
-          env:
-          - name: IP_LIST
-            value: "
-              default:192.168.55.10
-              default:192.168.55.11
-              default:192.168.55.12"
-      serviceAccountName: kubernetes-lb-controller
-      restartPolicy: Always
+data:
+  default: |-
+     192.168.55.10
+     192.168.55.11
+     192.168.55.12
 ```
 *Note:* The IPs are being added to the *default* `Namespace`.  
 *Note:* Not much test has been done on the environment formatting, so please, try to respect the formatting above.  
+*Note:* More `Namespaces` are supported, look into the examples.
+*Note:* If you are modifying the namespace with the service running, you might need to restart `kubernetes-lb-controller` Pod.
 
 ### Apply the Deployment
 ```sh
