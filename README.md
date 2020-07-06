@@ -45,7 +45,7 @@ $ sudo ip addr add 192.168.55.12/24 dev eth0 label eth0:2
 *Note:* We're using [Architecture 2](https://github.com/feitnomore/kubernetes-lb-controller/blob/master/images/arch_02.png) for this example. [Architecture 1](https://github.com/feitnomore/kubernetes-lb-controller/blob/master/images/arch_01.png) should work as well, however the IPs should be added to the nodes instead of the master.  
 
 ### Create the ConfigMap Descriptor
-Create the kubernetes-lb-controller_Configmap.yaml using the IPs that were added before. The list of IPs needs to be inside a file with the `namespace` name, like the example below:
+Create the kubernetes-lb-controller_ConfigMap.yaml using the IPs that were added before. The list of IPs needs to be inside a file with the `namespace` name, like the example below:
 ```yaml
 apiVersion: v1
 kind: ConfigMap
@@ -62,8 +62,13 @@ data:
 ```
 *Note:* The IPs are being added to the *default* `Namespace`.  
 *Note:* Not much test has been done on the environment formatting, so please, try to respect the formatting above.  
-*Note:* More `Namespaces` are supported, look into the examples.
+*Note:* More `Namespaces` are supported, please look into the examples.  
 *Note:* If you are modifying the namespace with the service running, you might need to restart `kubernetes-lb-controller` Pod.
+
+### Apply the ConfigMap
+```sh
+kubectl apply -f kubernetes-lb-controller_ConfigMap.yaml
+```
 
 ### Apply the Deployment
 ```sh
