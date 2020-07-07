@@ -12,7 +12,7 @@ In my case, I do this through aliases on the public interface, but can be done o
 
 Tests were performed on 2 cluster environments as well as a minikube deployment running on a VM.  
 The test cases performed can be found here.  
-The Controller Deploypment file is also available here.  
+The Controller ConfigMap file used to execute the tests is also available here.  
   
 List of test scripts:
 
