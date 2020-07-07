@@ -31,3 +31,10 @@ def printRoutes(allRoutes):
     strRouteTable = my_time + "\n" + str(routeTable) + "\n"
     # Writing table to the /route file
     routeFile.write(strRouteTable)
+
+# This is our Exception Handler
+def printException(e):
+    # Opening our termination-log device
+    terminationDevice = open("/dev/termination-log","a")
+    # Writing to the termination-log device
+    terminationDevice.write(e)
