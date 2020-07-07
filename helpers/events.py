@@ -45,6 +45,7 @@ def launchHandler():
                 
     except Exception as e:
         logutil.printException(e)
+        logutil.printMessage("Event Handler Exception: " + e)
 
 # Handles events of type "ADDED"
 def added(service):
