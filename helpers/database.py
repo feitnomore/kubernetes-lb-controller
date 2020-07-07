@@ -39,7 +39,7 @@ def loadIPList():
             # Skipping internal files not related to our config
             if ".." not in namespace:
                 # Building the relative path for the namespace config file
-                namespacepath = globalholders.configPath + namespace
+                namespacepath = globalholders.configPath + "/" + namespace
                 # Opening the config file
                 with open(namespacepath) as ipList:
                     # Reading IPs from file
