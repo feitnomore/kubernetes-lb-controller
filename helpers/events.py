@@ -22,7 +22,7 @@ def launchHandler():
             my_service = event['object']
             # Handle new service
             added(my_service)
-            # Get atual Route Table
+            # Get actual Route Table
             route_table = database.readDB()
             # Update Filesystem Route Table
             if(route_table is not False):
@@ -32,7 +32,7 @@ def launchHandler():
             my_service = event['object']
             # Handle updated service
             modified(my_service)
-            # Get atual Route Table
+            # Get actual Route Table
             route_table = database.readDB()
             # Update Filesystem Route Table
             if(route_table is not False):
@@ -42,7 +42,7 @@ def launchHandler():
             my_service = event['object']
             # Handle deleted service
             deleted(my_service)
-            # Get atual Route Table
+            # Get actual Route Table
             route_table = database.readDB()
             # Update Filesystem Route Table
             if(route_table is not False):
