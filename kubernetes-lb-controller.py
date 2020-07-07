@@ -18,7 +18,7 @@ def main():
         print("Error creating in-memory database")
         sys.exit(1)
 
-    # Create our "Ephemeral" In-Memory Route Table
+    # Create our "in-memory" Route Table
     if(database.createDB() is False):
         print("Error creating in-memory route table")
         sys.exit(1)

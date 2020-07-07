@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubernetes-lb-controller
+  namespace: kube-system
+  labels:
+    k8s-app: kubernetes-lb-controller
+spec:
+  selector:
+    matchLabels:
+      k8s-app: kubernetes-lb-controller
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        k8s-app: kubernetes-lb-controller
+    spec:
+      containers:
+        - name: kubernetes-lb-controller
+          image: feitnomore/kubernetes-lb-controller:latest
+          imagePullPolicy: Always
+          env:
+          - name: IP_LIST
+            value: "
+              default:172.16.230.220
+              default:172.16.230.221
+              default:172.16.230.222
+              default:172.16.230.223
+              default:172.16.230.224
+              test:172.16.230.225
+              test:172.16.230.226
+              test:172.16.230.227
+              test:172.16.230.228
+              test:172.16.230.229"
+      serviceAccountName: kubernetes-lb-controller
+      restartPolicy: Always
+      
