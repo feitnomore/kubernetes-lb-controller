@@ -7,6 +7,13 @@
 import datetime
 from prettytable import PrettyTable
 
+# This is responsible for general message printing to stdout
+def printMessage(message):
+    # Getting the actual date/time
+    my_time = datetime.datetime.now().strftime("%a %Y-%m-%d %H:%M:%S")
+    # Print the log to the console
+    print("[%s] %s" % (str(my_time), str(message)))
+
 # This is responsible for printing the Events to stdout
 def printEvent(event, ip, myaction, namespace, service, dst):
     # Getting the actual date/time
