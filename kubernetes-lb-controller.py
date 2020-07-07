@@ -43,13 +43,10 @@ def main():
         logutil.printRoutes(database.readDB())
 
     # Launch our Event Monitor/Handler
-    try:
-        logutil.printMessage("Starting the event handler")
-        events.launchHandler()
-    except Exception as e:
-        logutil.printException(e)
-        logutil.printMessage("Error on event handler")
-        sys.exit(1)
+    logutil.printMessage("Starting the event handler.")
+    events.launchHandler()
+    logutil.printMessage("Event handler terminated.")
+    sys.exit(1)
 
 if __name__ == '__main__':
     main()

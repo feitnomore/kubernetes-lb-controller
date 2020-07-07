@@ -10,3 +10,5 @@ databaseConnection = None
 coreApi = None
 # To hold Config Path
 configPath = "/etc/config"
+# Termination Device
+terminationDevice = "/dev/termination-log"

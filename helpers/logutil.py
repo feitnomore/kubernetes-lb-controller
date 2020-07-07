@@ -6,6 +6,7 @@
 
 import datetime
 from prettytable import PrettyTable
+from helpers import globalholders
 
 # This is responsible for general message printing to stdout
 def printMessage(message):
@@ -42,6 +43,6 @@ def printRoutes(allRoutes):
 # This is our Exception Handler
 def printException(e):
     # Opening our termination-log device
-    terminationDevice = open("/dev/termination-log","a")
+    terminationLog = open(globalholders.terminationDevice, "a")
     # Writing to the termination-log device
-    terminationDevice.write(e)
+    terminationLog.write(e)
