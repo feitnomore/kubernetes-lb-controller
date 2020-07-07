@@ -15,27 +15,27 @@ def main():
 
     # Initiate the Database Connection
     if(database.connectDB() is False):
-        print("Error creating in-memory database")
+        logutil.printMessage("Error creating in-memory database")
         sys.exit(1)
 
     # Create our "in-memory" Route Table
     if(database.createDB() is False):
-        print("Error creating in-memory route table")
+        logutil.printMessage("Error creating in-memory route table")
         sys.exit(1)
 
     # Load the IPs into the Route Table
     if(database.loadIPList() is False):
-        print("Error loading IPs into route table")
+        logutil.printMessage("Error loading IPs into route table")
         sys.exit(1)
 
     # Load Kubernetes API Configuration
     if(kubeclient.loadConfig() is False):
-        print("Error loading Kubernetes Config")
+        logutil.printMessage("Error loading Kubernetes Config")
         sys.exit(1)
 
     # Create Kubernetes API Connection
     if(kubeclient.connectApi() is False):
-        print("Error connecting to Kubernetes API")
+        logutil.printMessage("Error connecting to Kubernetes API")
         sys.exit(1)
         
     # Print the first route table to the file
@@ -44,10 +44,11 @@ def main():
 
     # Launch our Event Monitor/Handler
     try:
+        logutil.printMessage("Starting the event handler")
         events.launchHandler()
     except Exception as e:
         logutil.printException(e)
-        print("Error on event handler")
+        logutil.printMessage("Error on event handler")
         sys.exit(1)
 
 if __name__ == '__main__':
