@@ -9,7 +9,7 @@ from helpers import globalholders
 from kubernetes import client
 from kubernetes import config
 
-# Loads configuration
+# Loads configuration from Cluster
 def loadConfig():
     try:
         # Disable SSL Warnings:
@@ -34,10 +34,14 @@ def connectApi():
 # Adds the IP to the Service
 def serviceAddIP(service, ip):
     try:
+        # Create an empty list for IPs
         ipList = list()
         if(ip is not None):
+            # Append the IP to this list
             ipList.append(ip)
+        # Update our local copy of the Service Descriptor
         service.spec.external_i_ps = ipList
+        # Patch the cluster copy of the Service Descriptor
         globalholders.coreApi.patch_namespaced_service(service.metadata.name, service.metadata.namespace, service)
         return True
     except Exception as e:
