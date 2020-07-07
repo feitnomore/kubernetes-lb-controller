@@ -14,7 +14,7 @@ The idea of this Controller is to be able to provide Extenal IPs to `Services` o
 In order for this to work, the IPs that are going to be used needs to be available on the nodes that executes the `kube-proxy`. In my environments I do this by adding them to the `master` node.  
 The Controller can keep track of which IPs are in use, by which `Services`, and in case a new `Service` shows up and there are no free IPs, the Controller will leave the Service in pending status.
 It is possible to assign different IPs for different `Namespaces` as well, and remember, the aliases doesn't need to be in the same interface, for example, you can have some IP addresses on interface 1 for testing environemnt and some other IP addresses on interface 2 for development environment.  
-The Controller takes the `Namespace` and the IP that will be available as parameter. 
+The Controller use files with the `Namespace` as their name and the list of IPs that will be available as its content, one by line. These files are mapped through the use of `ConfigMap` functionality. 
 
 ## HOW TO INSTALL IT
 
