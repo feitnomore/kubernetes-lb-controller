@@ -7,6 +7,7 @@
 import os
 import sqlite3
 from helpers import globalholders
+from helpers import logutil
 
 # Performs the DB Connection
 def connectDB():
@@ -15,6 +16,7 @@ def connectDB():
         globalholders.databaseConnection = sqlite3.connect(':memory:')
         return True
     except Exception as e:
+        logutil.printException(e)
         return False
 
 # Creates our route table database
@@ -28,6 +30,7 @@ def createDB():
         globalholders.databaseConnection.commit()
         return True
     except Exception as e:
+        logutil.printException(e)
         return False
 
 # Loads IPs from Configmap into the route table
@@ -50,6 +53,7 @@ def loadIPList():
                         globalholders.databaseConnection.commit()
         return True
     except Exception as e:
+        logutil.printException(e)
         return False
 
 # Read the route table
@@ -61,6 +65,7 @@ def readDB():
         allRoutes = cursor.fetchall()
         return allRoutes
     except Exception as e:
+        logutil.printException(e)
         return False
 
 # Get a free ip from the route table
@@ -89,6 +94,7 @@ def getIP(namespace, name):
             # Found IP for the pair namespace/name
             return str(my_ip[0])
     except Exception as e:
+        logutil.printException(e)
         return None
 
 # Marks IP as in use on route table
@@ -101,6 +107,7 @@ def consumeIP(ip, name, namespace, dst):
         cursor.execute('UPDATE extips SET inuse=? , namespace=? , service=? , dst=? WHERE ip=?;', (svc_line))
         return True
     except Error as e:
+        logutil.printException(e)
         return False
 
 # Check if IP is on our route table

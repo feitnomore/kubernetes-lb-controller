@@ -6,6 +6,7 @@
 
 import urllib3
 from helpers import globalholders
+from helpers import logutil
 from kubernetes import client
 from kubernetes import config
 
@@ -21,6 +22,7 @@ def loadConfig():
         return True
         
     except Exception as e:
+        logutil.printException(e)
         return False
 
 # Performs the API Connection
@@ -29,6 +31,7 @@ def connectApi():
         globalholders.coreApi = client.CoreV1Api()
         return True
     except Exception as e:
+        logutil.printException(e)
         return False
 
 # Adds the IP to the Service
@@ -45,4 +48,5 @@ def serviceAddIP(service, ip):
         globalholders.coreApi.patch_namespaced_service(service.metadata.name, service.metadata.namespace, service)
         return True
     except Exception as e:
+        logutil.printException(e)
         return False
