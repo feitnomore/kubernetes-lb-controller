@@ -43,7 +43,6 @@ def loadIPList():
                         globalholders.databaseConnection.commit()
         return True
     except Exception as e:
-        print(e)
         return False
 
 # Read the route table
