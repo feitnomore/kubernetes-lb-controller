@@ -28,11 +28,11 @@ docker build -t kubernetes-lb-controller .
 ```
 
 ### Push the image to the Repository
-````
+```sh
 export MY_REPO="my_local_repository"
 docker tag kubernetes-lb-controller:latest $MY_REPO/kubernetes-lb-controller:latest
 docker push $MY_REPO/kubernetes-lb-controller:latest
-````
+```
 *Note:* Remember to set `MY_REPO`.  
 
 ### Create the ConfigMap Descriptor
@@ -51,6 +51,12 @@ data:
      192.168.55.11
      192.168.55.12
 ```
+
+### Apply the ConfigMap
+```sh
+kubectl apply -f ConfigMap.yaml
+```
+
 
 ### Create the Deployment Descriptor
 Create a simple *Deployment.yaml* file:  
@@ -91,8 +97,8 @@ spec:
 *Note:* Remember to set the `image` to the repository you used in the last step.   
 
 ### Execute the Deployment
-````
+```sh
 kubectl apply -f Deployment.yaml
-````
+```
 
-*Note:* Remember to create the `ServiceAccount`, `ClusterRole` and `ConfigMap` before creating the `Deployment`. Check [examples](https://github.com/feitnomore/kubernetes-lb-controller/tree/master/examples) for further information on the `ServiceAccount` and `ClusterRole`.
+*Note:* Remember to create the `ServiceAccount`, `ClusterRole` and `ClusterRoleBinding` before executing the `Deployment`. Check [examples](https://github.com/feitnomore/kubernetes-lb-controller/tree/master/examples) for further information on the `ServiceAccount` and `ClusterRole`.
