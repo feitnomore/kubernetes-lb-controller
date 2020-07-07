@@ -1,6 +1,6 @@
 #!/bin/sh
 # Build and Exec
-# I am too tired of doing this by hand
+# I am too lazy to do this by hand
 
 docker rm kubernetes-lb-controller:2.0
 docker rmi kubernetes-lb-controller:2.0 --force
