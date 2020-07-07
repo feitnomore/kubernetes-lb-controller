@@ -8,5 +8,3 @@
 databaseConnection = None
 # To handle kubernetes API connection
 coreApi = None
-# To hold Config Path
-configPath = "/etc/config/"
