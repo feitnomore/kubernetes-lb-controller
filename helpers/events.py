@@ -15,32 +15,34 @@ from helpers import kubeclient
 # This is the Handler
 def launchHandler():
     w = watch.Watch()
-    try: 
-        # Watching for event stream on Services
-        for event in w.stream(globalholders.coreApi.list_service_for_all_namespaces):
-            # A new service of type LoadBalancer was added
-            if (event['type'] == "ADDED" and event['object'].spec.type == "LoadBalancer"):
-                my_service = event['object']
-                # Handle new service
-                added(my_service)
-                
-            # A service of type LoadBalancer got modified
-            elif(event['type'] == "MODIFIED" and event['object'].spec.type == "LoadBalancer"):
-                my_service = event['object']
-                # Handle updated service
-                modified(my_service)
+    try:
+        # Lets run forever
+        while True:
+            # Watching for event stream on Services
+            for event in w.stream(globalholders.coreApi.list_service_for_all_namespaces):
+                # A new service of type LoadBalancer was added
+                if (event['type'] == "ADDED" and event['object'].spec.type == "LoadBalancer"):
+                    my_service = event['object']
+                    # Handle new service
+                    added(my_service)
+                    
+                # A service of type LoadBalancer got modified
+                elif(event['type'] == "MODIFIED" and event['object'].spec.type == "LoadBalancer"):
+                    my_service = event['object']
+                    # Handle updated service
+                    modified(my_service)
 
-            # A service of type LoadBalancer was deleted
-            elif(event['type'] == "DELETED" and event['object'].spec.type == "LoadBalancer"):
-                my_service = event['object']
-                # Handle deleted service
-                deleted(my_service)
+                # A service of type LoadBalancer was deleted
+                elif(event['type'] == "DELETED" and event['object'].spec.type == "LoadBalancer"):
+                    my_service = event['object']
+                    # Handle deleted service
+                    deleted(my_service)
 
-            # Get actual Route Table
-            route_table = database.readDB()
-            # Update Filesystem Route Table
-            if(route_table is not False):
-                logutil.printRoutes(route_table)
+                # Get actual Route Table
+                route_table = database.readDB()
+                # Update Filesystem Route Table
+                if(route_table is not False):
+                    logutil.printRoutes(route_table)
                 
     except Exception as e:
         logutil.printException(e)
