@@ -127,7 +127,7 @@ The expected result should be:
 [Tue 2018-07-17 21:25:02] ADDED 192.168.55.10 OK namespace:default service:my-testing-service destination:10.104.131.229
 [Tue 2018-07-17 21:25:02] MODIFIED 192.168.55.10 IGNORED namespace:default service:my-testing-service destination:10.104.131.229
 ```
-*Note:* When a Service is created and we intercept it with our controller, we patch it and modify it so that we can add the desired IP. This will cause our controller to also intercept the modification. In this case we're ignoring because the service descriptor for the service will be matching the entry in our internal route table.  
+*Note:* When a Service is created/added we'll intercept it with our controller and we'll patch it and modify it so that we can add the desired external IP. This will cause our controller to also intercept the modification that was done by ourselves. In this case we'll ignore the patching because the service descriptor for the service in question will be matching the entry in our internal route table.  
 
 ### Verify the Controller Routing Table
 ```sh
