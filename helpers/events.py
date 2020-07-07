@@ -192,12 +192,15 @@ def deleted(service):
             # Failed updating route table
             logutil.printEvent("DELETED", service.spec.external_i_ps[0], "FAILED_DB", service.metadata.namespace, service.metadata.name, service.spec.cluster_ip)
     else:
-        # Preciso procurar pelo nome do servico e apagar
+        # Looking up service IP by name
         svc_ip = database.returnIP(service.metadata.name, service.metadata.namespace)
         if(svc_ip is not None):
+            # Found and IP for this service on the route table
             if(database.releaseIP(svc_ip) is True):
+                # Route table updated
                 logutil.printEvent("DELETED", svc_ip, "OK", service.metadata.namespace, service.metadata.name, service.spec.cluster_ip)
             else:
+                # Failed updating route table
                 logutil.printEvent("DELETED", svc_ip, "FAILED_DB", service.metadata.namespace, service.metadata.name, service.spec.cluster_ip)
         else:
             # IP is not on route table, lets ignore it

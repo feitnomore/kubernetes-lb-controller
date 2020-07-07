@@ -1,5 +1,5 @@
 # database - Main Database Handler
-# We use a SQLite in memory database to keep track of
+# We use a "Ephemeral" SQLite in memory database to keep track of
 # our routing table. Here is where we handle it.
 #
 # Marcelo Feitoza Parisi (marcelo@feitoza.com.br)
@@ -26,21 +26,24 @@ def createDB():
     except Exception as e:
         return False
 
-
-# Loads IPs from Environment into the route table
+# Loads IPs from Configmap into the route table
 def loadIPList():
     try:
-        # Read from POD Environment
-        allIPs = os.environ["IP_LIST"].split()
-        cursor = globalholders.databaseConnection.cursor()
-        for line in allIPs:
-            line = str(line)
-            line = line.rstrip()
-            namespace,ip = line.split(":")
-            cursor.execute('INSERT INTO extips(ip,inuse,namespace) VALUES(?,?,?);' , (ip, 'n', namespace, ))
-        globalholders.databaseConnection.commit()
+        # List config files
+        allNamespaces = os.listdir(globalholders.configPath)
+        for namespace in allNamespaces:
+            # Skipping internal files not related to our config
+            if ".." not in namespace:
+                namespacepath = globalholders.configPath + namespace
+                with open(namespacepath) as ipList:
+                    # Reading IPs from file
+                    for ip in ipList:
+                        cursor = globalholders.databaseConnection.cursor()
+                        cursor.execute('INSERT INTO extips(ip,inuse,namespace) VALUES(?,?,?);' , (ip.strip(), 'n', namespace, ))
+                        globalholders.databaseConnection.commit()
         return True
     except Exception as e:
+        print(e)
         return False
 
 # Read the route table
@@ -129,3 +132,4 @@ def returnIP(name, namespace):
     else:
         svc_ip = databaseEntry[0]
         return str(svc_ip)
+        

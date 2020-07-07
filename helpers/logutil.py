@@ -7,7 +7,7 @@
 import datetime
 from prettytable import PrettyTable
 
-# This is responsible for printing the Events
+# This is responsible for printing the Events to stdout
 def printEvent(event, ip, myaction, namespace, service, dst):
     # Getting the actual date/time
     my_time = datetime.datetime.now().strftime("%a %Y-%m-%d %H:%M:%S")
