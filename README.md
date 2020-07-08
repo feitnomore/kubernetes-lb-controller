@@ -139,7 +139,7 @@ kubectl exec $LB_CONTROLLER -n kube-system cat /var/run/routes
 
 The expected result should be:
 ```
-Tue 2020-07-077 21:25:02
+Tue 2020-07-07 21:25:02
 +----------------+--------+-----------+----------------------+----------------+
 |       IP       | IN USE | NAMESPACE |     SERVICE NAME     |   CLUSTER IP   |
 +----------------+--------+-----------+----------------------+----------------+
