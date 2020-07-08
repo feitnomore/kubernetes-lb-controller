@@ -23,12 +23,12 @@ def printEvent(event, ip, myaction, namespace, service, dst):
     print("[%s] %s %s %s namespace:%s service:%s destination:%s" % (str(my_time), str(event), str(ip), str(myaction), str(namespace), str(service), str(dst)))
 
 # This is responsible for maintaining the local fs route table
-# Route table on /routes
+# Route table on globalholder.routeTable
 def printRoutes(allRoutes):
     # Getting the actual date/time
     my_time = datetime.datetime.now().strftime("%a %Y-%m-%d %H:%M:%S")
-    # Opening/Creating the /routes file
-    routeFile = open("/routes","w")
+    # Opening/Creating the globalrouters.routeTable file
+    routeFile = open(globalholders.routeTable,"w")
     # Creating a pretty table with the captions
     routeTable = PrettyTable(['IP','IN USE','NAMESPACE','SERVICE NAME','CLUSTER IP'])
     # Adding the routes to the table
@@ -37,7 +37,7 @@ def printRoutes(allRoutes):
 
     # Formatting our output
     strRouteTable = my_time + "\n" + str(routeTable) + "\n"
-    # Writing table to the /route file
+    # Writing table to the globalholder.routeTable file
     routeFile.write(strRouteTable)
 
 # This is our Exception Handler

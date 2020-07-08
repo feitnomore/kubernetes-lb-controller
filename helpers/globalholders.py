@@ -12,3 +12,5 @@ coreApi = None
 configPath = "/etc/config"
 # Termination Device
 terminationDevice = "/dev/termination-log"
+# Route Table Path
+routeTable = "/var/run/routes"
