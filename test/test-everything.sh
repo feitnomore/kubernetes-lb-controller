@@ -13,12 +13,14 @@ for i in *
 do
 	if [ -d $i ]
 	then
-		$i/execute.sh
+        cd $i/
+		./execute.sh
 		sleep 15s
-		if [ -f $i/cleanup.sh ]
+		if [ -f ./cleanup.sh ]
 		then
-			$i/cleanup.sh
+			./cleanup.sh
 			sleep 15s
 		fi
+        cd ..
 	fi
 done
