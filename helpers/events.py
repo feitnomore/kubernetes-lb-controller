@@ -8,8 +8,8 @@
 
 from kubernetes import watch
 from helpers import globalholders
-from helpers import database
 from helpers import services
+from helpers import database
 from helpers import logutil
 
 # This is the Handler

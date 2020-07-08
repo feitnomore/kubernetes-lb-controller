@@ -10,6 +10,7 @@ COPY helpers/events.py /usr/src/app/helpers/
 COPY helpers/globalholders.py /usr/src/app/helpers/
 COPY helpers/kubeclient.py /usr/src/app/helpers/
 COPY helpers/logutil.py /usr/src/app/helpers/
+COPY helpers/services.py /usr/src/app/helpers/
 
 # Copy Application
 WORKDIR /usr/src/app

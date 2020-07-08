@@ -6,7 +6,6 @@
 import sys
 from helpers import globalholders
 from helpers import database
-from helpers import services
 from helpers import logutil
 from helpers import kubeclient
 from helpers import events

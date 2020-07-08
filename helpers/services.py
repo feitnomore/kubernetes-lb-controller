@@ -7,9 +7,10 @@
 # Marcelo Feitoza Parisi (marcelo@feitoza.com.br)
 
 from helpers import globalholders
+from helpers import kubeclient
 from helpers import database
 from helpers import logutil
-from helpers import kubeclient
+
 
 # Handles events of type "ADDED"
 def added(service):
