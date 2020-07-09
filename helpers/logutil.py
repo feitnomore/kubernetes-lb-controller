@@ -45,4 +45,4 @@ def printException(e):
     # Opening our termination-log device
     terminationLog = open(globalholders.terminationDevice, "a")
     # Writing to the termination-log device
-    terminationLog.write(e)
+    terminationLog.write(str(e))
