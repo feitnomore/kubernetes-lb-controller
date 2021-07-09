@@ -1,4 +1,4 @@
-FROM python:2.7
+FROM python:3.9
 
 LABEL maintainer="Marcelo Feitoza Parisi (marcelo@feitoza.com.br)"
 
@@ -22,4 +22,4 @@ RUN pip install urllib3
 RUN pip install pysqlite3
 RUN pip install prettytable
 
-CMD [ "python", "-u", "./kubernetes-lb-controller.py" ]
+CMD [ "python3", "-u", "./kubernetes-lb-controller.py" ]
